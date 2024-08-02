@@ -10,6 +10,7 @@ import {
 } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo";
 import { useState } from "react";
+import { links } from "../data/links";
 
 export default function Header() {
   const [isMenuOpen] = useState(false);
@@ -27,38 +28,22 @@ export default function Header() {
           </NavbarBrand>
         </NavbarContent>
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
-          <NavbarItem>
-            <Link color="foreground" href="/">
-              Home
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link color="foreground" href="#" aria-current="page">
-              Posts
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link color="foreground" href="#">
-              Our Team
-            </Link>
-          </NavbarItem>
+          {links.map((link) => (
+            <NavbarItem key={link.name}>
+              <Link color="primary" href={link.href} className="capitalize">
+                {link.name}
+              </Link>
+            </NavbarItem>
+          ))}
         </NavbarContent>
         <NavbarMenu>
-          <NavbarMenuItem>
-            <Link color="foreground" href="/">
-              Home
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem>
-            <Link color="foreground" href="#" aria-current="page">
-              Posts
-            </Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem>
-            <Link color="foreground" href="#">
-              Our Team
-            </Link>
-          </NavbarMenuItem>
+          {links.map((link) => (
+            <NavbarMenuItem key={link.name}>
+              <Link color="primary" href={link.href} className="capitalize">
+                {link.name}
+              </Link>
+            </NavbarMenuItem>
+          ))}
         </NavbarMenu>
       </Navbar>
     </header>

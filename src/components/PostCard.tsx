@@ -15,7 +15,7 @@ type PostCardProps = {
 export default function PostCard({ post }: PostCardProps) {
   const postLink = `/posts/${post.id}`;
   return (
-    <Card className="max-w-[400px] mx-auto">
+    <Card className="max-w-[400px]">
       <CardHeader className="flex gap-3">
         <CardOwner userId={post.userId}/>
       </CardHeader>

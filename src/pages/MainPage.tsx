@@ -1,13 +1,21 @@
-import { useEffect } from "react";
 import PostCard from "../components/PostCard";
 import { useStore } from "../store/useStore";
+import PostsSkeleton from "../components/skeletons/PostsSkeleton";
+import { useQuery } from "@tanstack/react-query";
+import { getAllPosts } from "../services";
+import { useEffect } from "react";
 
 export default function MainPage() {
-  const { fetchingPosts, posts } = useStore();
+  const { fetchingAllPosts, posts } = useStore();
+  const { isLoading, data } = useQuery({
+    queryKey: ["posts"],
+    queryFn: getAllPosts,
+  });
   useEffect(() => {
-    fetchingPosts();
+    if (data) {
+      fetchingAllPosts(data);
+    }
   }, []);
-
   return (
     <div className="w-full p-12">
       <div className="flex flex-col gap-4 items-center md:flex-row md:gap-0 md:items-end justify-between mb-12 header">
@@ -39,9 +47,12 @@ export default function MainPage() {
         </div>
       </div>
       <div className="grid grid-cols-1 gap-12 md:grid-cols-2 xl:grid-cols-3">
-        {posts?.posts.map((post) => (
-          <PostCard post={post} key={post.id}/>
-        ))}
+        {isLoading ? (
+          <PostsSkeleton />
+        ) : (
+          posts?.posts.map((post) => <PostCard post={post} key={post.id} />)
+        )}
+        {/* <PostsSkeleton /> */}
       </div>
     </div>
   );

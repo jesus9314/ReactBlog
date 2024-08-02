@@ -5,11 +5,13 @@ import { getAllPosts, getPost, getUser } from "../services";
 
 type BlogState = {
   posts: AllPostsType | null;
+  postsLoading: boolean;
   post: PostsType | null;
   user: UserType | null;
   fetchingPosts: () => Promise<void>;
   fetchingApost: (id: PostsType["id"]) => Promise<void>;
   fetchingUser: (id: UserType["id"]) => Promise<void>;
+  fetchingAllPosts: (posts: AllPostsType) => void;
 };
 
 export const useStore = create<BlogState>()(
@@ -19,11 +21,16 @@ export const useStore = create<BlogState>()(
         posts: null,
         post: null,
         user: null,
+        postsLoading: false,
         fetchingPosts: async () => {
+          set({
+            postsLoading: true,
+          });
           const posts = await getAllPosts();
           set({
             posts,
             post: null,
+            postsLoading: false,
           });
         },
         fetchingApost: async (id) => {
@@ -36,6 +43,11 @@ export const useStore = create<BlogState>()(
           const user = await getUser(id);
           set({
             user,
+          });
+        },
+        fetchingAllPosts: (posts) => {
+          set({
+            posts,
           });
         },
       }),
