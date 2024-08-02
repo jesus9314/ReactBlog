@@ -6,7 +6,6 @@ import {
   CardFooter,
   Divider,
   Link,
-  Image,
 } from "@nextui-org/react";
 import CardOwner from "./CardOwner";
 

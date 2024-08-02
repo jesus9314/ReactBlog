@@ -1,7 +1,6 @@
 import { Image, Link } from "@nextui-org/react";
 import { UserType } from "../types";
-import { useStore } from "../store/useStore";
-import { useEffect, useId, useState } from "react";
+import { useEffect, useState } from "react";
 import { getUser } from "../services";
 
 type CardOwnerProps = {
