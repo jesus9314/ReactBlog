@@ -1,6 +1,5 @@
 import { Image, Link } from "@nextui-org/react";
 import { UserType } from "../types";
-import { useEffect, useId, useState } from "react";
 import { getUser } from "../services";
 import { useQuery } from "@tanstack/react-query";
 import CardOwnerSkeleton from "./skeletons/CardOwnerSkeleton";
