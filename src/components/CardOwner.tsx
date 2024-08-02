@@ -12,7 +12,6 @@ export default function CardOwner({ userId }: CardOwnerProps) {
     const fetch = async () => {
       const owner = await getUser(userId);
       if (owner) {
-        console.log(owner);
         setUser(owner);
       }
     };
