@@ -1,13 +1,12 @@
 import PostCard from "../components/PostCard";
 import PostsSkeleton from "../components/skeletons/PostsSkeleton";
 import { useQuery } from "@tanstack/react-query";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent } from "react";
 import { useStore } from "../store/useStore";
 import { getAllPosts } from "../services";
 
 export default function MainPage() {
-  const [input, setInput] = useState("");
-  const { setQuery, query } = useStore();
+  const { setQuery, query, input, setInput } = useStore();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setQuery(input);
@@ -39,6 +38,7 @@ export default function MainPage() {
                 name="search"
                 className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
                 placeholder="Enter a title"
+                value={input}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
                   setInput(e.target.value)
                 }
