@@ -9,14 +9,26 @@ import {
   NavbarMenuToggle,
 } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { links } from "../data/links";
+import { useLocation } from "react-router-dom";
 
 export default function Header() {
   const [isMenuOpen] = useState(false);
+  const [openMobile, setOpenMobile] = useState(false);
+  const { pathname } = useLocation();
+  useEffect(() => {
+    setOpenMobile(false);
+  }, [pathname]);
+
+
   return (
     <header>
-      <Navbar isBordered>
+      <Navbar
+        isBordered
+        isMenuOpen={openMobile}
+        onMenuOpenChange={setOpenMobile}
+      >
         <NavbarContent>
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
