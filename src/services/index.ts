@@ -2,8 +2,9 @@ import axios from "axios";
 import { AllPostsSchema, postSchema, userSchema } from "../utils/posts-schemas";
 import { PostsType, UserType } from "../types";
 
-export async function getAllPosts() {
-  const url = "https://dummyjson.com/posts";
+export async function getAllPosts(search? : string) {
+  
+  const url = search ? `https://dummyjson.com/posts/search?q=${search}` :"https://dummyjson.com/posts";
   try {
     const { data } = await axios(url);
     const result = AllPostsSchema.safeParse(data);
